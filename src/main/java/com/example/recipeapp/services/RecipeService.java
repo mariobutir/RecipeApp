@@ -7,4 +7,5 @@ import com.example.recipeapp.models.Recipe;
 public interface RecipeService {
 
 	public Set<Recipe> getRecipes();
+	public Recipe save(Recipe recipe);
 }
