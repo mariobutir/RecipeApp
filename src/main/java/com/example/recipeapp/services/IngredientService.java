@@ -1,10 +1,10 @@
 package com.example.recipeapp.services;
 
-import com.example.recipeapp.models.Ingredient;
+import com.example.recipeapp.commands.IngredientCommand;
 
 public interface IngredientService {
 
-	Ingredient findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
+	IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
 
-	Ingredient saveIngredient(Ingredient command);
+	IngredientCommand saveIngredientCommand(IngredientCommand command);
 }

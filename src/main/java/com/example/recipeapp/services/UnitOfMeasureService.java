@@ -2,9 +2,9 @@ package com.example.recipeapp.services;
 
 import java.util.Set;
 
-import com.example.recipeapp.models.UnitOfMeasure;
+import com.example.recipeapp.commands.UnitOfMeasureCommand;
 
 public interface UnitOfMeasureService {
 
-	Set<UnitOfMeasure> listAllUoms();
+	Set<UnitOfMeasureCommand> listAllUoms();
 }

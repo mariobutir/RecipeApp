@@ -9,9 +9,6 @@ import com.example.recipeapp.commands.RecipeCommand;
 import com.example.recipeapp.models.Category;
 import com.example.recipeapp.models.Recipe;
 
-/**
- * Created by jt on 6/21/17.
- */
 @Component
 public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
 
