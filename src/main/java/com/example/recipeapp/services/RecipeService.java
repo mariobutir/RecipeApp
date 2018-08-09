@@ -8,4 +8,5 @@ public interface RecipeService {
 
 	public Set<Recipe> getRecipes();
 	public Recipe save(Recipe recipe);
+	public void deleteById(Long id);
 }
