@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.recipeapp.commands.IngredientCommand;
+import com.example.recipeapp.commands.RecipeCommand;
+import com.example.recipeapp.commands.UnitOfMeasureCommand;
 import com.example.recipeapp.services.IngredientService;
 import com.example.recipeapp.services.RecipeService;
 import com.example.recipeapp.services.UnitOfMeasureService;
@@ -41,6 +43,24 @@ public class IngredientController {
 	}
 
 	@GetMapping
+	@RequestMapping("recipe/{recipeId}/ingredient/new")
+	public String newIngredient(@PathVariable String recipeId, Model model) {
+
+		RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+		// need to return back parent id for hidden form property
+		IngredientCommand ingredientCommand = new IngredientCommand();
+		ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+		model.addAttribute("ingredient", ingredientCommand);
+
+		ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+		model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+
+		return "recipe/ingredient/ingredientform";
+	}
+
+	@GetMapping
 	@RequestMapping("recipe/{recipeId}/ingredient/{id}/show")
 	public String showRecipeIngredient(@PathVariable String recipeId, @PathVariable String id, Model model) {
 		model.addAttribute("ingredient",
@@ -56,6 +76,15 @@ public class IngredientController {
 
 		model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
 		return "recipe/ingredient/ingredientform";
+	}
+	
+	@GetMapping
+	@RequestMapping("recipe/{recipeId}/ingredient/{id}/delete")
+	public String deleteById(@PathVariable Long id, @PathVariable Long recipeId) {
+
+		log.debug("Deleting ingredient by id: " + id);
+		ingredientService.deleteById(recipeId, id);
+		return "redirect:/recipe/" + recipeId + "/ingredients";
 	}
 
 	@PostMapping("recipe/{recipeId}/ingredient")
